@@ -17,11 +17,13 @@ namespace BackEndProject_Edu.Controllers
         public IActionResult Index()
         {
             var sliders = _context.Sliders.AsNoTracking().ToList();
-            var sliderTexts = _context.SliderTexts.AsNoTracking().FirstOrDefault();
+            var events = _context.Events.AsNoTracking().ToList();
+            var teachers = _context.Teachers.AsNoTracking().ToList();
             HomeVM homeVM = new()
             {
                 Sliders = sliders,
-                SliderTexts = sliderTexts
+                Events = events,
+                Teachers = teachers
             };
             return View(homeVM);
         }

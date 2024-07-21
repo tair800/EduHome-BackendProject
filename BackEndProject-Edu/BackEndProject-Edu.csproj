@@ -16,4 +16,9 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Areas\AdminArea\Controllers\" />
+	  <Folder Include="Areas\AdminArea\ViewModels\" />
+	  <Folder Include="Areas\AdminArea\Services\" />
+	</ItemGroup>
 </Project>

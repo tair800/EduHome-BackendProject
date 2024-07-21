@@ -6,7 +6,7 @@
         <div class="single-event mb-60">
             <div class="event-img">
                 <a href="event-details.html">
-                    <img src="~/img/event/@item.ImgUrl" alt="event">
+                    <img src="~/img/event/@item.ImgUrl" alt="event" >
                     <div class="course-hover">
                         <i class="fa fa-link"></i>
                     </div>
@@ -18,11 +18,11 @@
             <div class="event-content text-left">
                 <h4><a href="event-details.html">@item.Name</a></h4>
                 <ul>
-                    <li><span>time:</span>@item.Time</li>
+                    <li><span>time:</span> @item.Time</li>
                     <li><span>venue</span>@item.Venue</li>
                 </ul>
                 <div class="event-content-right">
-                    <a class="default-btn" asp-action="detail" asp-route-id="@item.Id">join now</a>
+                    <a class="default-btn" href="event/detail/@item.Id">join now</a>
                 </div>
             </div>
         </div>

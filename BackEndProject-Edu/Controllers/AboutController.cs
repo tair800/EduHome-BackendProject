@@ -1,20 +1,32 @@
-﻿using BackEndProject_Edu.Services.Interfaces;
+﻿using BackEndProject_Edu.Data;
+using BackEndProject_Edu.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackEndProject_Edu.Controllers
 {
     public class AboutController : Controller
     {
-        private readonly ILayoutService _layoutService;
+        private readonly EduDbContext _eduDbContext;
 
-        public AboutController(ILayoutService IlayoutService)
+        public AboutController(EduDbContext eduDbContext)
         {
-            _layoutService = IlayoutService;
+            _eduDbContext = eduDbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_layoutService.GetSettings());
+            var settings = await _eduDbContext.Settings.ToDictionaryAsync(k => k.Key, k => k.Value);
+            var teacher = await _eduDbContext.Teachers.ToListAsync();
+            var ev = await _eduDbContext.Events.ToListAsync();
+            AboutVM aboutVM = new()
+            {
+                KeyValues = settings,
+                Teachers = teacher,
+                Events = ev
+            };
+
+            return View(aboutVM);
         }
 
     }

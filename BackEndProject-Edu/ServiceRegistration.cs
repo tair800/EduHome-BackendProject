@@ -1,6 +1,8 @@
 ﻿using BackEndProject_Edu.Data;
+using BackEndProject_Edu.Models;
 using BackEndProject_Edu.Services;
 using BackEndProject_Edu.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackEndProject_Edu
@@ -28,34 +30,34 @@ namespace BackEndProject_Edu
 
             //todo:bunlar mesaji falan qoshmag uchundu,birinciler ise serviceler
             // services.AddScoped<IBasketService, BasketService>();
-            //services.AddScoped<IEmailService, EmailService>();
-            //services.AddIdentity<AppUser, IdentityRole>(options =>
-            //{
-            //    options.Password = new()
-            //    {
-            //        RequiredLength = 8,
-            //        RequireUppercase = true,
-            //        RequireLowercase = true,
-            //        RequireDigit = true,
-            //        RequireNonAlphanumeric = true
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password = new()
+                {
+                    RequiredLength = 8,
+                    RequireUppercase = true,
+                    RequireLowercase = true,
+                    RequireDigit = true,
+                    RequireNonAlphanumeric = true
 
 
-            //    };
-            //    options.Lockout = new()
-            //    {
-            //        MaxFailedAccessAttempts = 5,
-            //        AllowedForNewUsers = true,
-            //        DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5)
-            //    };
-            //    //options.User = new()
-            //    //{
-            //    //    todo:email confirm sondurmusen
-            //    //     RequireUniqueEmail = true,
-            //    //};
-            //    //options.SignIn.RequireConfirmedEmail = true;
+                };
+                options.Lockout = new()
+                {
+                    MaxFailedAccessAttempts = 5,
+                    AllowedForNewUsers = true,
+                    DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5)
+                };
+                options.User = new()
+                {
+                    //todo:email confirm sondurmusen
+                    RequireUniqueEmail = true,
+                };
+                options.SignIn.RequireConfirmedEmail = true;
 
-            //}).AddDefaultTokenProviders().AddEntityFrameworkStores<FiorelloDbContext>();
-            //services.AddSignalR();
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<EduDbContext>();
+            services.AddSignalR();
         }
     }
 }

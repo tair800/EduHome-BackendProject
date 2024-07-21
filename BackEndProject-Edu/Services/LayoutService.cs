@@ -14,5 +14,7 @@ namespace BackEndProject_Edu.Services
         public IDictionary<string, string> GetSettings() => _dbContext.Settings
             .ToDictionary(k => k.Key, k => k.Value);
 
+        //public IActionResult GetTeachers() => _dbContext.Teachers.ToList();
+
     }
 }

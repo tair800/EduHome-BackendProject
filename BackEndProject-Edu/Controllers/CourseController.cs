@@ -23,8 +23,9 @@ namespace BackEndProject_Edu.Controllers
         public IActionResult Detail(int? id)
         {
             if (id is null) return BadRequest();
-            var course = _context.Courses.AsNoTracking().FirstOrDefault(b => b.Id == id);
+            var course = _context.Courses.Include(c => c.Category).Include(m => m.CourseTags).ThenInclude(m => m.Tag).AsNoTracking().FirstOrDefault(b => b.Id == id);
             var blogs = _context.Blogs.AsNoTracking().ToList();
+            var categories = _context.Categories.Include(m => m.Course).AsNoTracking().ToList();
 
             CourseVM courseVM = new()
             {
@@ -33,7 +34,9 @@ namespace BackEndProject_Edu.Controllers
                 Desc = course.Desc,
                 About = course.About,
                 Apply = course.Apply,
+                Categories = categories,
                 Blogs = blogs,
+                CourseTags = course.CourseTags,
             };
             return View(courseVM);
         }

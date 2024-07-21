@@ -1,4 +1,5 @@
 ﻿using BackEndProject_Edu.Data;
+using BackEndProject_Edu.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,9 +21,22 @@ namespace BackEndProject_Edu.Controllers
         public IActionResult Detail(int? id)
         {
             if (id == null) return BadRequest();
-            var item = _dbContext.Events.Include(k => k.Speakers).FirstOrDefault(k => k.Id == id);
-            if (item == null) return NotFound();
-            return View(item);
+            var item = _dbContext.Events.Include(i => i.Speakers).FirstOrDefault(k => k.Id == id);
+            var courses = _dbContext.Courses.AsNoTracking().ToList();
+            if (item == null && courses is null) return NotFound();
+
+            EventVM eventVM = new()
+            {
+                Name = item.Name,
+                Desc = item.Desc,
+                ImgUrl = item.ImgUrl,
+                Time = item.Time,
+                Venue = item.Venue,
+
+                Courses = courses,
+                Speakers = item.Speakers
+            };
+            return View(eventVM);
         }
     }
 }

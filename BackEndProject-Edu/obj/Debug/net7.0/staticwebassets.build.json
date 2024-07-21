@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9460Q26GHvv3eKvoR1cXTdAVG0ilOpVnuEdJ8zD6jn8=",
+  "Hash": "ZcIy8IGobomzz1oVn8qezN8WSvoYkX/C9nFXYG5mMB4=",
   "Source": "BackEndProject-Edu",
   "BasePath": "_content/BackEndProject-Edu",
   "Mode": "Default",
@@ -2409,6 +2409,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\vendor\\modernizr-2.8.3.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\templates\\emailTemplate\\emailConfirm.html",
+      "SourceId": "BackEndProject-Edu",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\",
+      "BasePath": "_content/BackEndProject-Edu",
+      "RelativePath": "templates/emailTemplate/emailConfirm.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\templates\\emailTemplate\\emailConfirm.html"
     }
   ]
 }

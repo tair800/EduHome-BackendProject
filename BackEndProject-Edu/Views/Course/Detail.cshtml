@@ -38,7 +38,7 @@
                             </div>
                             <div class="single-course-left">
                                 <h3>certification</h3>
-                                <p class="margin">@Model.Certificion</p>
+                                <p class="margin">@Model.Certification</p>
                             </div>
                         </div>
                         <div class="course-details-right">
@@ -95,14 +95,12 @@
                         </div>
                     </div>
                     <div class="single-blog-widget mb-50">
-                        <h3>categories</h3>
+                        <h3>Categories</h3>
                         <ul>
-                            <li><a href="#">CSS Engineering (10)</a></li>
-                            <li><a href="#">Political Science (12)</a></li>
-                            <li><a href="#">Micro Biology (08)</a></li>
-                            <li><a href="#">HTML5 &amp; CSS3 (15)</a></li>
-                            <li><a href="#">Web Design (20)</a></li>
-                            <li><a href="#">PHP (23)</a></li>
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li><a href="#">@item.Name (@item.Course.Count)</a></li>
+                            }
                         </ul>
                     </div>
                     <div class="single-blog-widget mb-50">
@@ -118,7 +116,7 @@
                             <div class="single-post mb-30">
                                 <div class="single-post-img">
                                     <a href="blog-details.html">
-                                        <img src="~/img/blog/@blog.ImgUrl" width="80" height="80"alt="post">
+                                        <img src="~/img/blog/@blog.ImgUrl" width="80" height="80" alt="post">
                                         <div class="blog-hover">
                                             <i class="fa fa-link"></i>
                                         </div>
@@ -133,14 +131,13 @@
                     </div>
                     <div class="single-blog-widget">
                         <h3>tags</h3>
-                        <div class="single-tag">
-                            <a href="blog-details.html" class="mr-10 mb-10">course</a>
-                            <a href="blog-details.html" class="mr-10 mb-10">education</a>
-                            <a href="blog-details.html" class="mb-10">teachers</a>
-                            <a href="blog-details.html" class="mr-10">learning</a>
-                            <a href="blog-details.html" class="mr-10">university</a>
-                            <a href="blog-details.html">events</a>
-                        </div>
+                        @foreach (var tag in Model.CourseTags)
+                        {
+                            <div class="single-tag">
+                                <a href="blog-details.html" class="mr-10 mb-10">@tag.Tag.Name</a>
+
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

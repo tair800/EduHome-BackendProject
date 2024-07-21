@@ -9,10 +9,12 @@
         public string About { get; set; }
         public string Apply { get; set; }
         public string Certification { get; set; }
-        public string Features { get; set; }
-        //public ICollection<CourseBlog> CoursesBlogs { get; set; }
-        //public int EventId { get; set; }
-        //public Event Event { get; set; }
+
+        public ICollection<CourseFeatures> courseFeatures { get; set; }
+
+        public int? CategoryId { get; set; }
+        public Category Category { get; set; }
+        public ICollection<CourseTag> CourseTags { get; set; }
 
     }
 }

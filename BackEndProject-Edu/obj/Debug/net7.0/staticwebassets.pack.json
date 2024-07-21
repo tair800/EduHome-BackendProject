@@ -501,6 +501,10 @@
       "PackagePath": "staticwebassets\\js\\vendor\\modernizr-2.8.3.min.js"
     },
     {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\templates\\emailTemplate\\emailConfirm.html",
+      "PackagePath": "staticwebassets\\templates\\emailTemplate\\emailConfirm.html"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.BackEndProject-Edu.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

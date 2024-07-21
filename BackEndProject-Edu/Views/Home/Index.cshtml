@@ -6,25 +6,26 @@
         @foreach (var img in Model.Sliders)
         {
             <div class="single-slide item" style="background-image: url(img/slider/@img.ImgUrl)"></div>
-
-        }
-        <!-- Start Slider Content -->
-        <div class="slider-content-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7 col-md-offset-left-5">
-                        <div class="slide-content-wrapper text-left">
-                            <div class="slide-content">
-                                <h3>@Model.SliderTexts.Title </h3>
-                                <p>@Model.SliderTexts.Desc  </p>
-                                <a class="default-btn" asp-controller="about" asp-action="index">@Model.SliderTexts.ImgUrl</a>
+            <!-- Start Slider Content -->
+            <div class="slider-content-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-md-offset-left-5">
+                            <div class="slide-content-wrapper text-left">
+                                <div class="slide-content">
+                                    
+                                <h3>@img.Title </h3>
+                                <p>@img.Desc  </p>
+                                <a class="default-btn" asp-controller="about" asp-action="index">@img.LearnMore</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
- </div>
+        }
+       
+    </div>
 
 </section>
 <!-- Background Area End -->
@@ -35,42 +36,16 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="notice-left">
                     <h3>notice board</h3>
-                    <div class="single-notice-left mb-25 pb-25">
-                        <h4>5, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left mb-25 pb-25">
-                        <h4>4, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left pb-75">
-                        <h4>3, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left mb-25 pb-25">
-                        <h4>5, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left mb-25 pb-25">
-                        <h4>4, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left pb-70">
-                        <h4>3, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left mb-25 pb-25">
-                        <h4>5, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left mb-25 pb-25">
-                        <h4>4, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
-                    <div class="single-notice-left pb-70">
-                        <h4>3, June 2017</h4>
-                        <p>I must explain to you how all this mistaken idea of denouncing plasure and praising pain was born and I will give you a complete </p>
-                    </div>
+                    @foreach (var item in Model.Events)
+                    {
+                        <a asp-controller="event" asp-action="detail" asp-route-id="@item.Id">
+                            <div class="single-notice-left mb-25 pb-25">
+                                <h4>@item.Time.ToString("dd")-<span>@item.Time.ToString("MMMM")</span> </h4>
+                                <p>@item.Name </p>
+                            </div>
+
+                        </a>
+                    }
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -138,145 +113,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="single-event mb-35">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">20 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">MICRO BIOLOGICAL WORKSHOP</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
+            <div class="col-12">
+                @foreach (var item in Model.Events.Take(8))
+                {
+
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="single-event mb-35">
+                            <div class="event-date">
+                                <h3><a>@item.Time.ToString("dd")<span>@item.Time.ToString("MMMM")</span></a></h3>
+                            </div>
+                            <div class="event-content text-left">
+                                <div class="event-content-left">
+                                    <h4><a>@item.Name</a></h4>
+                                    <ul>
+                                        <li><i class="fa fa-clock-o"></i>@item.Time.ToString("hh: mm tt")</li>
+                                        <li><i class="fa fa-map-marker"></i>@item.Venue</li>
+                                    </ul>
+                                </div>
+                                <div class="event-content-right">
+                                    <a class="default-btn" asp-controller="event" asp-action="detail" asp-route-id="@item.Id">join now</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
+
                     </div>
-                </div>
-                <div class="single-event mb-35">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">18 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">ADVANCE PHP WORKSHOP</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
-                        </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-event mb-35">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">16 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">LEARN ENGLISH HISTORY</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
-                        </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-event">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">14 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">GLOBAL ECONOMIC CONFERENCE</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
-                        </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 hidden-sm hidden-xs">
-                <div class="single-event mb-35">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">12 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">MATHEMATICAL WORKSHOP</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
-                        </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-event mb-35">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">10 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">WORDPRESS AUTHOR MEET UP</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
-                        </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-event mb-35">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">08 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">DIGITAL MARKETING ANALYSIS</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
-                        </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-event">
-                    <div class="event-date">
-                        <h3><a href="event-details.html">06 <span>June</span></a></h3>
-                    </div>
-                    <div class="event-content text-left">
-                        <div class="event-content-left">
-                            <h4><a href="event-details.html">WROKSHOP ON UI &amp; UX</a></h4>
-                            <ul>
-                                <li><i class="fa fa-clock-o"></i>9.00 AM - 4.45 PM</li>
-                                <li><i class="fa fa-map-marker"></i>New Yourk City</li>
-                            </ul>
-                        </div>
-                        <div class="event-content-right">
-                            <a class="default-btn" href="event-details.html">join now</a>
-                        </div>
-                    </div>
-                </div>
+
+                }
             </div>
         </div>
     </div>
@@ -286,23 +148,32 @@
 <div class="testimonial-area pt-110 pb-105 text-center">
     <div class="container">
         <div class="row">
-            <div class="testimonial-owl owl-theme owl-carousel">
-                <div class="col-md-8 col-md-offset-2 col-sm-12">
-                    <div class="single-testimonial">
-                        <div class="testimonial-info">
-                            <div class="testimonial-img">
-                                <img src="img/testimonial/testimonial.jpg" alt="testimonial">
-                            </div>
-                            <div class="testimonial-content">
-                                <p>I must explain to you how all this mistaken idea of denoung pleure and praising pain was born and I will give you a coete account of the system, and expound the actual</p>
-                                <h4>David Morgan</h4>
-                                <h5>Student, CSE</h5>
+
+
+
+            @foreach (var teacher in Model.Teachers.Take(1))
+            {
+                <div class="testimonial-owl owl-theme owl-carousel">
+                    <div class="col-md-8 col-md-offset-2 col-sm-12">
+                        <div class="single-testimonial">
+                            <div class="testimonial-info">
+                                <div class="testimonial-img">
+                                    <img src="~/img/teacher/@teacher.ImgUrl" alt="testimonial">
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>@teacher.About.Substring(0,Math.Min(120,teacher.About.Length))</p>
+                                    <h4>@teacher.Name</h4>
+                                    <h5>@teacher.Position</h5>
+                                </div>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
-            </div>
+            }
         </div>
+
     </div>
 </div>
 <!-- Testimonial Area End -->
@@ -319,10 +190,10 @@
         </div>
         <div class="row">
             @await Component.InvokeAsync("Blog")
-            </div>
-         
         </div>
+
     </div>
+</div>
 </div>
 <!-- Blog Area End -->
 <!-- Subscribe Start -->
