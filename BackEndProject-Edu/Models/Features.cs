@@ -4,12 +4,12 @@
     {
         public DateTime StartDate { get; set; }
         public string Duration { get; set; }
-        public string Hours { get; set; }
+        public string? Hours { get; set; }
         public string Skill { get; set; }
         public string Language { get; set; }
         public int StuNum { get; set; }
         public string Assesment { get; set; }
-        public ICollection<CourseFeatures> courseFeatures { get; set; }
+        public ICollection<CourseFeature> courseFeatures { get; set; }
 
     }
 }

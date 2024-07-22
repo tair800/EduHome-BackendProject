@@ -11,7 +11,7 @@ namespace BackEndProject_Edu.Data
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<CourseFeatures> CourseFeatures { get; set; }
+        public DbSet<CourseFeature> CourseFeatures { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Teacher> Teachers { get; set; }

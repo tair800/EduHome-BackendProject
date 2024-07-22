@@ -44,13 +44,14 @@
                         <div class="course-details-right">
                             <h3>COURSE FEATURES</h3>
                             <ul>
-                                <li>starts <span>25 june, 2017</span></li>
-                                <li>duration <span>6 Month</span></li>
-                                <li>class duration <span>3 hours</span></li>
-                                <li>skill level <span>all level</span></li>
-                                <li>language <span>english</span></li>
-                                <li>students <span>420</span></li>
-                                <li>assesments <span>self</span></li>
+                                @foreach (var features in Model.CourseFeatures)
+                                {
+                                    <li>@Html.Raw(features.Features.StartDate)</li>
+                                    <li>@Html.Raw(features.Features.Skill)</li>
+                                    <li>@Html.Raw(features.Features.Language)</li>
+                                    <li>@Html.Raw(features.Features.StuNum)</li>
+                                    <li>@Html.Raw(features.Features.Assesment)</li>
+                                }
                             </ul>
                             <h3 class="red">course fee $789</h3>
                         </div>

@@ -107,6 +107,9 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
@@ -163,6 +166,9 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
@@ -179,7 +185,7 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("BackEndProject_Edu.Models.CourseFeatures", b =>
+            modelBuilder.Entity("BackEndProject_Edu.Models.CourseFeature", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,10 +199,7 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FeatureId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FeaturesId")
+                    b.Property<int>("FeaturesId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -614,7 +617,7 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("BackEndProject_Edu.Models.CourseFeatures", b =>
+            modelBuilder.Entity("BackEndProject_Edu.Models.CourseFeature", b =>
                 {
                     b.HasOne("BackEndProject_Edu.Models.Course", "Course")
                         .WithMany("courseFeatures")
@@ -624,7 +627,9 @@ namespace BackEndProjectEdu.Data.Migrations
 
                     b.HasOne("BackEndProject_Edu.Models.Features", "Features")
                         .WithMany("courseFeatures")
-                        .HasForeignKey("FeaturesId");
+                        .HasForeignKey("FeaturesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Course");
 

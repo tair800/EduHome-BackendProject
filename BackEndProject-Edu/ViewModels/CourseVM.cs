@@ -10,9 +10,12 @@ namespace BackEndProject_Edu.ViewModels
         public string About { get; set; }
         public string Apply { get; set; }
         public string Certification { get; set; }
+        public DateTime? Date { get; set; }
+
 
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<Blog> Blogs { get; set; }
         public IEnumerable<CourseTag> CourseTags { get; set; }
+        public IEnumerable<CourseFeature> CourseFeatures { get; set; }
     }
 }
