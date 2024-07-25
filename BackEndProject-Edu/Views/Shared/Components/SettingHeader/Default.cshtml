@@ -1,32 +1,5 @@
 ﻿@model Dictionary<string,string>
 <header class="top">
-    <div class="header-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="header-top-left">
-                        <p>HAVE ANY QUESTION ?  +880 5698  598  6587</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="header-top-right text-right">
-                        <ul>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li>@ViewBag.FullName</li>
-                                <a asp-controller="account " asp-action="logout">Log out</a>
-                            }
-                            else
-                            {
-                                <li><a href="account/login">login</a></li>
-                                <li><a href="account/register">Register</a></li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="header-area header-sticky fixed">
         <div class="container">
             <div class="row">
@@ -44,7 +17,7 @@
                                     <li>
                                         <a href="">Home</a>
                                         <ul>
-                                            <li><a href="">Home One</a></li>
+                                            <li><a href="/adminarea">AdminPanel</a></li>
 
                                         </ul>
                                     </li>
@@ -80,7 +53,19 @@
                                         </ul>
                                     </li>
                                     <li><a href="/contact">Contact</a></li>
-                                    <li><a href="#">Buy Now</a>
+                                    <li><a href="#">Buy Now</a></li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li>@ViewBag.FullName</li>
+                                        <a href="/account/logout">Log out</a>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/account/login">login</a></li>
+                                        <li><a href="/account/register">Register</a></li>
+                                    }
+                                   
+
                                 </ul>
                             </nav>
                         </div>

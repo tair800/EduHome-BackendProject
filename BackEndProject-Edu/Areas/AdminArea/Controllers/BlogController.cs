@@ -2,6 +2,7 @@
 using BackEndProject_Edu.Data;
 using BackEndProject_Edu.Models;
 using BackEndProject_Edu.Services.Interfaces;
+using BackEndProject_Edu.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,9 +21,11 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             _emailService = emailService;
 
         }
-        public async Task<IActionResult> Index()
+
+
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var query = await _dbContext.Blogs
+            var query = _dbContext.Blogs
                 .AsNoTracking()
                 .Select(m => new BlogListVM()
                 {
@@ -30,9 +33,9 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                     Name = m.Name,
                     ImgUrl = m.ImgUrl,
                     Date = m.Date,
-                }).ToListAsync();
+                });
 
-            return View(query);
+            return View(await PaginationVM<BlogListVM>.CreateVM(query, page, 2));
         }
         public async Task<IActionResult> Detail(int? id)
         {
@@ -50,6 +53,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 
             return View(query);
         }
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null) return BadRequest();
@@ -61,6 +65,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 
 
         }
+
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return BadRequest();
@@ -109,7 +114,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(BlogCreateVM request)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return View(request);
             var file = request.Photo;
             if (file == null || file.Length == 0)
             {

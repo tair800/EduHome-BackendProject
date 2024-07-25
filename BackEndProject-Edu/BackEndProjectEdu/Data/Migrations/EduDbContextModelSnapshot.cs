@@ -291,6 +291,9 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
                     b.Property<string>("Skill")
                         .HasColumnType("nvarchar(max)");
 

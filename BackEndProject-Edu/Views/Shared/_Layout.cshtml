@@ -25,6 +25,23 @@
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/responsive.css">
     <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <style>
+        .test {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%
+        }
+
+        .bg-online {
+            background-color: green;
+        }
+
+        .bg-offline {
+            background-color: silver;
+        }
+    </style>
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -48,7 +65,17 @@
     <script src="~/js/jquery.nicescroll.min.js"></script>
     <script src="~/js/plugins.js"></script>
     <script src="~/js/main.js"></script>
+
+    @RenderSection("Scripts", false);
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/testhub").build();
+        connection.start();
+        connection.on("sendmessage", function (message) {
+            alert(message)
+        })
+    </script>
 </body>
+
 
 <!-- Mirrored from demo.devitems.com/eduhome/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jun 2020 19:44:03 GMT -->
 </html>

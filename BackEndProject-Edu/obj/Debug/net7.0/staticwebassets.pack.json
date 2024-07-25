@@ -837,6 +837,22 @@
       "PackagePath": "staticwebassets\\img\\post\\post3.jpg"
     },
     {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\slider\\event6.jpg",
+      "PackagePath": "staticwebassets\\img\\slider\\event6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\slider\\event7.jpg",
+      "PackagePath": "staticwebassets\\img\\slider\\event7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\slider\\event8.jpg",
+      "PackagePath": "staticwebassets\\img\\slider\\event8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\slider\\event9.jpg",
+      "PackagePath": "staticwebassets\\img\\slider\\event9.jpg"
+    },
+    {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\slider\\home.png",
       "PackagePath": "staticwebassets\\img\\slider\\home.png"
     },
@@ -959,6 +975,10 @@
     {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\templates\\emailTemplate\\emailConfirm.html",
       "PackagePath": "staticwebassets\\templates\\emailTemplate\\emailConfirm.html"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\templates\\passwordTemplate\\forgetPassword.html",
+      "PackagePath": "staticwebassets\\templates\\passwordTemplate\\forgetPassword.html"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.BackEndProject-Edu.Microsoft.AspNetCore.StaticWebAssets.props",

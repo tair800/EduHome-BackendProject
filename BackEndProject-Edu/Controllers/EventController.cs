@@ -38,5 +38,10 @@ namespace BackEndProject_Edu.Controllers
             };
             return View(eventVM);
         }
+        public async Task<IActionResult> EventSearch(string text)
+        {
+            var data = await _dbContext.Events.Where(k => k.Name.ToLower().Contains(text.ToLower())).Take(5).ToListAsync();
+            return PartialView("_EventSearchPartialView", data);
+        }
     }
 }

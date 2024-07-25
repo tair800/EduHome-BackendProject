@@ -9,6 +9,5 @@ namespace BackEndProject_Edu.Models
         public string Title { get; set; }
         [StringLength(200)]
         public string Desc { get; set; }
-        public string LearnMore { get; set; }
     }
 }

@@ -46,14 +46,16 @@
                             <ul>
                                 @foreach (var features in Model.CourseFeatures)
                                 {
-                                    <li>@Html.Raw(features.Features.StartDate)</li>
-                                    <li>@Html.Raw(features.Features.Skill)</li>
-                                    <li>@Html.Raw(features.Features.Language)</li>
-                                    <li>@Html.Raw(features.Features.StuNum)</li>
-                                    <li>@Html.Raw(features.Features.Assesment)</li>
+                                    <li>starts <span>@features.Features.StartDate.ToString("dd,MMMM yyyy")</span></li>
+                                    <li>duration <span>@features.Features.Duration</span></li>
+                                    <li>class duration <span>@features.Features.Hours hours</span></li>
+                                    <li>skill level <span>@features.Features.Skill</span></li>
+                                    <li>language <span>@features.Features.Language</span></li>
+                                    <li>students <span>@features.Features.StuNum</span></li>
+                                    <li>assesments <span>@features.Features.Assesment</span></li>
+                                    <h3 class="red">course fee $@features.Features.Price</h3>
                                 }
                             </ul>
-                            <h3 class="red">course fee $789</h3>
                         </div>
                     </div>
                     <div class="reply-area">
@@ -88,7 +90,11 @@
                         <h3>search</h3>
                         <div class="blog-search">
                             <form id="search" action="#">
-                                <input type="search" placeholder="Search..." name="search" />
+                                <ul class="list-unstyled py-3" id="searchList">
+                                    <li>
+                                        <input type="search" placeholder="Search..." id="input-search" name="search" />
+                                    </li>
+                                </ul>
                                 <button type="submit">
                                     <span><i class="fa fa-search"></i></span>
                                 </button>

@@ -1,6 +1,7 @@
 ﻿using BackEndProject_Edu.Areas.AdminArea.ViewModels.CourseVMs;
 using BackEndProject_Edu.Data;
 using BackEndProject_Edu.Services.Interfaces;
+using BackEndProject_Edu.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,9 +19,9 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             _emailService = emailService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var query = await _dbContext.Courses
+            var query = _dbContext.Courses
                 .Include(m => m.Category)
                 .AsNoTracking()
                 .Select(m => new CourseListVM()
@@ -30,9 +31,9 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                     ImgUrl = m.ImgUrl,
                     CategoryName = m.Category.Name,
                     Date = m.Date
-                }).ToListAsync();
+                });
 
-            return View(query);
+            return View(await PaginationVM<CourseListVM>.CreateVM(query, page, 2));
         }
         public async Task<IActionResult> Detail(int? id)
         {

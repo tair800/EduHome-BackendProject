@@ -1,6 +1,64 @@
 (function ($) {
 "use strict";  
-    
+
+
+    //search
+    $("#input-search").on("keyup", function () {
+        $("#searchList li").slice(1).remove();
+        var value = $(this).val().trim();
+        if (value) {
+            $.ajax({
+                url: "/blog/SearchBlog?text=" + value,
+                method: "get",
+                success: function (datas) {
+                    $("#searchList").append(datas)
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+    });
+
+    $("#input-search").on("keyup", function () {
+        $("#searchList li").slice(1).remove();
+        var value = $(this).val().trim();
+        if (value) {
+            $.ajax({
+                url: "/course/CourseSearch?text=" + value,
+                method: "get",
+                success: function (datas) {
+                    $("#searchList").append(datas)
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+    });
+
+    $("#input-search").on("keyup", function () {
+        $("#searchList li").slice(1).remove();
+        var value = $(this).val().trim();
+        if (value) {
+            $.ajax({
+                url: "/event/EventSearch?text=" + value,
+                method: "get",
+                success: function (datas) {
+                    $("#searchList").append(datas)
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+    });
+
+
+
+
+
+
 /*------------------------------------
 	Sticky Menu 
 --------------------------------------*/

@@ -39,9 +39,16 @@ namespace BackEndProject_Edu.Controllers
                 Certification = course.Certification,
                 Blogs = blogs,
                 CourseTags = course.CourseTags,
-                CourseFeatures = course.courseFeatures
+                CourseFeatures = course.courseFeatures,
+
+
             };
             return View(courseVM);
+        }
+        public async Task<IActionResult> CourseSearch(string text)
+        {
+            var data = await _context.Courses.Where(k => k.Name.ToLower().Contains(text.ToLower())).Take(5).ToListAsync();
+            return PartialView("_CourseSearchPartialView", data);
         }
 
     }

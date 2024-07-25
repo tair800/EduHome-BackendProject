@@ -1,6 +1,7 @@
 
 
 using BackEndProject_Edu;
+using BackEndProject_Edu.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -22,5 +23,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
     );
-//app.MapHub<ChatHub>("/testhub");
+app.MapHub<ChatHub>("/testhub");
 app.Run();

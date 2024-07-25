@@ -5,23 +5,25 @@
         <!-- Start Slingle Slide -->
         @foreach (var img in Model.Sliders)
         {
-            <div class="single-slide item" style="background-image: url(img/slider/@img.ImgUrl)"></div>
-            <!-- Start Slider Content -->
-            <div class="slider-content-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-7 col-md-offset-left-5">
-                            <div class="slide-content-wrapper text-left">
-                                <div class="slide-content">
-                                    
-                                <h3>@img.Title </h3>
-                                <p>@img.Desc  </p>
-                                <a class="default-btn" asp-controller="about" asp-action="index">@img.LearnMore</a>
+            <div class="single-slide item" style="background-image: url(img/slider/@img.ImgUrl)">
+                <!-- Start Slider Content -->
+                <div class="slider-content-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-left-5">
+                                <div class="slide-content-wrapper text-left">
+                                    <div class="slide-content">
+                                        <h3>@img.Title </h3>
+                                        
+                                        <p>@img.Desc  </p>
+                                        <a class="default-btn" href="about.html">Learn more</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Start Slider Content -->
             </div>
         }
        
