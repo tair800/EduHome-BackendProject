@@ -8,11 +8,11 @@
 
             <br />
             <h4>Name-<span>@Model.Name</span></h4>
-            <br/>
+            <br />
 
 
             <h4>@Model.Date?.ToString("dd.MM.yyyy")</h4>
-            
+
 
             <br />
 
@@ -39,24 +39,38 @@
             </p>
 
             <br />
-          @*   todo:features and coursetags *@
+            @*   todo:features and coursetags *@
             <p>
                 Course Features:
-        @*         Duration - @Html.Raw(string.Join(", ", Model.CourseFeatures?.Select(cf => cf.Features.Duration)))
-                Skill - @Html.Raw(string.Join(", ", Model.CourseFeatures?.Select(cf => cf.Features.Skill)))
-                Language - @Html.Raw(string.Join(", ", Model.CourseFeatures?.Select(cf => cf.Features.Language)))
-                StudentLimit - @Html.Raw(string.Join(", ", Model.CourseFeatures?.Select(cf => cf.Features.StuNum)))
-                Assesment - @Html.Raw(string.Join(", ", Model.CourseFeatures?.Select(cf => cf.Features.Assesment)))
-                Price - @Html.Raw(string.Join(", ", Model.CourseFeatures?.Select(cf => cf.Features.Hours))) *@
+                @foreach (var feature in Model.CourseFeatures)
+                {
+                    <li>
+                        Start Date: @feature.StartDate.ToString("dd.MM.yyyy") <br />
+                        Duration: @feature.Duration <br />
+                        Hours: @feature.Hours <br />
+                        Skill: @feature.Skill <br />
+                        Language: @feature.Language <br />
+                        Student Number: @feature.StuNum <br />
+                        Assessment: @feature.Assesment <br />
+                        Price: @feature.Price
+                    </li>
+                }
             </p>
             <br />
 
             <p>
-                Course Category:@Model.CategoryName
+                <h1>Course Category:</h1>
+                @Model.CategoryName
             </p>
             <br />
             <p>
-                Course Tags:@Model.CourseTags
+                Course Tags:
+                <ul>
+                    @foreach (var tag in Model.CourseTags)
+                    {
+                        <li>@tag.Name</li>
+                    }
+                </ul>
             </p>
             <a asp-action="index" class="btn btn-outline-dark">Go Back</a>
 

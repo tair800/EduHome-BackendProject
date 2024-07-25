@@ -11,6 +11,8 @@ namespace BackEndProject_Edu.Data
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Features> Features { get; set; }
+
         public DbSet<CourseFeature> CourseFeatures { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
@@ -18,6 +20,7 @@ namespace BackEndProject_Edu.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<CourseTag> CourseTags { get; set; }
+
 
 
         public EduDbContext(DbContextOptions options) : base(options)

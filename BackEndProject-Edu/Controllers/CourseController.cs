@@ -24,7 +24,7 @@ namespace BackEndProject_Edu.Controllers
         {
             if (id is null) return BadRequest();
 
-            var course = _context.Courses.Include(c => c.Category).Include(m => m.CourseTags).ThenInclude(m => m.Tag).Include(m => m.courseFeatures).ThenInclude(m => m.Features).AsNoTracking().FirstOrDefault(b => b.Id == id);
+            var course = _context.Courses.Include(c => c.Category).Include(m => m.CourseTags).ThenInclude(m => m.Tag).Include(m => m.CourseFeatures).ThenInclude(m => m.Features).AsNoTracking().FirstOrDefault(b => b.Id == id);
             var blogs = _context.Blogs.AsNoTracking().ToList();
             var categories = _context.Categories.Include(m => m.Course).AsNoTracking().ToList();
 
@@ -39,7 +39,7 @@ namespace BackEndProject_Edu.Controllers
                 Certification = course.Certification,
                 Blogs = blogs,
                 CourseTags = course.CourseTags,
-                CourseFeatures = course.courseFeatures,
+                CourseFeatures = course.CourseFeatures,
 
 
             };
