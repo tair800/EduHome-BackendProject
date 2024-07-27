@@ -725,6 +725,26 @@
       "PackagePath": "staticwebassets\\img\\course\\courses-details.jpg"
     },
     {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\course\\event6.jpg",
+      "PackagePath": "staticwebassets\\img\\course\\event6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\course\\event7.jpg",
+      "PackagePath": "staticwebassets\\img\\course\\event7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\course\\event8.jpg",
+      "PackagePath": "staticwebassets\\img\\course\\event8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\course\\home.png",
+      "PackagePath": "staticwebassets\\img\\course\\home.png"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\course\\slider2.jpg",
+      "PackagePath": "staticwebassets\\img\\course\\slider2.jpg"
+    },
+    {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\event-details.jpg",
       "PackagePath": "staticwebassets\\img\\event\\event-details.jpg"
     },
@@ -775,6 +795,14 @@
     {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\event9.jpg",
       "PackagePath": "staticwebassets\\img\\event\\event9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\home.png",
+      "PackagePath": "staticwebassets\\img\\event\\home.png"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\slider3.jpg",
+      "PackagePath": "staticwebassets\\img\\event\\slider3.jpg"
     },
     {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\speaker1.jpg",

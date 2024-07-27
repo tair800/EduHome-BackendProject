@@ -1,6 +1,47 @@
 (function ($) {
 "use strict";  
 
+    //comment
+    $(".reply-btn").on("click", function () {
+        const courseId = $(this).attr("course-id");
+        const message = $(".comment").val();
+        $.ajax({
+            url: `/course/addComment?courseId=${courseId}&message=${message}`,
+            method: "Post",
+            success: function (datas) {
+              console.log(message)
+            },
+         
+        })
+    });
+
+    //loadmore
+    let skip = 3;
+    $("#loadmore").on("click", function () {
+        $.ajax({
+            url: "/course/LoadMore?offset=" + skip,
+            method: "get",
+            success: function (datas) {
+                $('#courseList').append(datas);
+                skip += 3;
+                if (skip >= $("#CourseCount").val()) {
+                    $('#loadmore').remove();
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    })
+
+
+
+
+
+
+
+
+
 
     //search
     $("#input-search").on("keyup", function () {

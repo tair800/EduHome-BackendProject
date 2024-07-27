@@ -5,6 +5,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.ViewModels.CourseVMs
 {
     public class CourseUpdateVM
     {
+        public int Id { get; set; }
         public string ImgUrl { get; set; }
         public IFormFile Photo { get; set; }
         public string Name { get; set; }

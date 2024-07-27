@@ -1,5 +1,7 @@
 ﻿using BackEndProject_Edu.Data;
+using BackEndProject_Edu.Models;
 using BackEndProject_Edu.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +10,12 @@ namespace BackEndProject_Edu.Controllers
     public class CourseController : Controller
     {
         private readonly EduDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public CourseController(EduDbContext context)
+        public CourseController(EduDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -30,6 +34,7 @@ namespace BackEndProject_Edu.Controllers
 
             CourseVM courseVM = new()
             {
+                Id = course.Id,
                 Name = course.Name,
                 ImgUrl = course.ImgUrl,
                 Desc = course.Desc,
@@ -50,6 +55,36 @@ namespace BackEndProject_Edu.Controllers
             var data = await _context.Courses.Where(k => k.Name.ToLower().Contains(text.ToLower())).Take(5).ToListAsync();
             return PartialView("_CourseSearchPartialView", data);
         }
+        [HttpPost]
+        public async Task<IActionResult> AddComment(int courseId, string message)
+        {
+            AppUser existUser = new();
+            if (User.Identity.IsAuthenticated)
+            {
+                existUser = await _userManager.GetUserAsync(User);
+            }
+            else
+            {
+                return RedirectToAction("login", "Account");
 
+            }
+            Comment newComment = new()
+            {
+                Message = message,
+                CourseId = courseId,
+                AppUserId = existUser.Id
+            };
+            await _context.Comments.AddAsync(newComment);
+
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        public IActionResult LoadMore(int offset = 3)
+        {
+            var datas = _context.Courses.Skip(offset).Take(3).ToList();
+            return PartialView("_CoursePartialView", datas);
+
+        }
     }
 }

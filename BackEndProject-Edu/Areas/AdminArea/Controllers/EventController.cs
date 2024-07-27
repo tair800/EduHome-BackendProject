@@ -123,7 +123,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 }).FirstOrDefaultAsync(e => e.Id == id);
 
             if (ev is null) return NotFound();
-            return RedirectToAction("index");
+            return View(ev);
         }
 
         [HttpPost]
@@ -131,22 +131,20 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
         public async Task<IActionResult> Update(int? id, EventUpdateVM request)
         {
             if (id is null) return BadRequest();
-            var ev = await _dbContext.Events
-                .ToListAsync();
+            var ev = await _dbContext.Events.FindAsync(id);
 
             var file = request.Photo;
-            Event item = new()
-            {
-                Id = request.Id,
-                Name = request.Name,
-                Desc = request.Desc,
-                Time = DateTime.Now,
-                Venue = request.Venue,
-                ImgUrl = await SaveFilesAsync(file),
-            };
+
+            ev.Id = request.Id;
+            ev.Name = request.Name;
+            ev.Desc = request.Desc;
+            ev.Time = DateTime.Now;
+            ev.Venue = request.Venue;
+            ev.ImgUrl = await SaveFilesAsync(file);
+
 
             await _dbContext.SaveChangesAsync();
-            return View("index");
+            return RedirectToAction("index");
         }
 
 

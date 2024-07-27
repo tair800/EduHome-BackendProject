@@ -4,6 +4,6 @@
     {
         public string Name { get; set; }
 
-        public ICollection<CourseTag> CourseSkills { get; set; }
+        public ICollection<CourseTag> CourseTag { get; set; }
     }
 }

@@ -44,10 +44,9 @@ namespace BackEndProject_Edu.Areas.AdminArea.ViewModels.CourseVMs
         public int CategoryId { get; set; }
         [Required]
         public List<int> TagIds { get; set; }
-        [Required]
 
-        public List<int> FeaturesIds { get; set; }
+        //public List<int> FeaturesIds { get; set; }
 
-        public DateTime? Date { get; set; }
+        //public DateTime? Date { get; set; }
     }
 }

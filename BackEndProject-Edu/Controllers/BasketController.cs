@@ -20,6 +20,7 @@ namespace BackEndProject_Edu.Controllers
 
             return View();
         }
+
         public async Task<IActionResult> AddBasket(int? id)
         {
             if (id is null) return BadRequest();

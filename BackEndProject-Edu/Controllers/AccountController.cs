@@ -103,6 +103,11 @@ namespace BackEndProject_Edu.Controllers
                 ModelState.AddModelError("", "Username or Password is wrong");
                 return View(request);
             }
+            //if (!user.EmailConfirmed)
+            //{
+            //    ModelState.AddModelError("", "Verification needed");
+            //    return View(loginVM);
+            //}
 
             var roles = await _userManager.GetRolesAsync(user);
             if (roles.Contains("admin")) return RedirectToAction("index", "dashboard", new { area = "adminarea" });

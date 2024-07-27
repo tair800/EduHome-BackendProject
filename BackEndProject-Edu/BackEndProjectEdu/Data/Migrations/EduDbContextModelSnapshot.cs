@@ -143,6 +143,35 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("BackEndProject_Edu.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("BackEndProject_Edu.Models.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -347,9 +376,6 @@ namespace BackEndProjectEdu.Data.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ImgUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LearnMore")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -611,6 +637,23 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BackEndProject_Edu.Models.Comment", b =>
+                {
+                    b.HasOne("BackEndProject_Edu.Models.AppUser", "AppUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("BackEndProject_Edu.Models.Course", "Course")
+                        .WithMany("Comments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("BackEndProject_Edu.Models.Course", b =>
                 {
                     b.HasOne("BackEndProject_Edu.Models.Category", "Category")
@@ -623,7 +666,7 @@ namespace BackEndProjectEdu.Data.Migrations
             modelBuilder.Entity("BackEndProject_Edu.Models.CourseFeature", b =>
                 {
                     b.HasOne("BackEndProject_Edu.Models.Course", "Course")
-                        .WithMany("courseFeatures")
+                        .WithMany("CourseFeatures")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -648,7 +691,7 @@ namespace BackEndProjectEdu.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("BackEndProject_Edu.Models.Tag", "Tag")
-                        .WithMany("CourseSkills")
+                        .WithMany("CourseTag")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -720,6 +763,11 @@ namespace BackEndProjectEdu.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BackEndProject_Edu.Models.AppUser", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
             modelBuilder.Entity("BackEndProject_Edu.Models.Category", b =>
                 {
                     b.Navigation("Course");
@@ -727,9 +775,11 @@ namespace BackEndProjectEdu.Data.Migrations
 
             modelBuilder.Entity("BackEndProject_Edu.Models.Course", b =>
                 {
-                    b.Navigation("CourseTags");
+                    b.Navigation("Comments");
 
-                    b.Navigation("courseFeatures");
+                    b.Navigation("CourseFeatures");
+
+                    b.Navigation("CourseTags");
                 });
 
             modelBuilder.Entity("BackEndProject_Edu.Models.Event", b =>
@@ -744,7 +794,7 @@ namespace BackEndProjectEdu.Data.Migrations
 
             modelBuilder.Entity("BackEndProject_Edu.Models.Tag", b =>
                 {
-                    b.Navigation("CourseSkills");
+                    b.Navigation("CourseTag");
                 });
 #pragma warning restore 612, 618
         }

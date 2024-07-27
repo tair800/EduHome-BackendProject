@@ -2,6 +2,7 @@
 using BackEndProject_Edu.Data;
 using BackEndProject_Edu.Models;
 using BackEndProject_Edu.Services.Interfaces;
+using BackEndProject_Edu.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -56,8 +57,8 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 CourseTags = new List<CourseTag>(),
                 CourseFeatures = new List<CourseFeature>(),
                 CategoryId = request.CategoryId,
-
             };
+
             Features newFeature = new()
             {
                 StartDate = DateTime.Now,
@@ -69,6 +70,11 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 Price = request.Price,
                 Language = request.Language,
             };
+
+            await _dbContext.Features.AddAsync(newFeature);
+            await _dbContext.Courses.AddAsync(newCourse);
+            await _dbContext.SaveChangesAsync();
+
             newCourse.CourseTags.AddRange(request.TagIds
                 .Select(tagIds => new CourseTag()
                 {
@@ -76,15 +82,8 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                     TagId = tagIds
                 }));
 
-            newCourse.CourseFeatures.AddRange(request.FeaturesIds
-                .Select(featureIds => new CourseFeature()
-                {
-                    CourseId = newCourse.Id,
-                    FeaturesId = featureIds
-                }));
+            newCourse.CourseFeatures.Add(new CourseFeature() { CourseId = newCourse.Id, FeaturesId = newFeature.Id, CreatedDate = DateTime.Now });
 
-            await _dbContext.Courses.AddAsync(newCourse);
-            await _dbContext.Features.AddAsync(newFeature);
             await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("Index");
@@ -137,6 +136,12 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 Features = dbCourse.CourseFeatures,
                 Tags = dbCourse.CourseTags,
                 CategoryId = dbCourse.Category.Id,
+                Skill = dbCourse.CourseFeatures.FirstOrDefault().Features.Skill,
+                Language = dbCourse.CourseFeatures.FirstOrDefault().Features.Language,
+                StuNum = dbCourse.CourseFeatures.FirstOrDefault().Features.StuNum,
+                Assesment = dbCourse.CourseFeatures.FirstOrDefault().Features.Assesment,
+                Price = dbCourse.CourseFeatures.FirstOrDefault().Features.Price,
+                Hours = dbCourse.CourseFeatures.FirstOrDefault().Features.Hours,
 
             };
 
@@ -144,6 +149,60 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             ViewBag.Tags = await GetTags();
 
             return View(model);
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Update(int? id, CourseUpdateVM request)
+        {
+
+
+
+            if (!ModelState.IsValid) return View(request);
+
+
+            var newCourse = await _dbContext.Courses.FirstOrDefaultAsync(m => m.Id == id);
+            var newFeature = await _dbContext.Features.FirstOrDefaultAsync(m => m.Id == id);
+            var file = request.Photo;
+
+
+            newCourse.Name = request.Name;
+            newCourse.Desc = request.Desc;
+            newCourse.ImgUrl = await SaveFilesAsync(file);
+            newCourse.About = request.About;
+            newCourse.Certification = request.Certification;
+            newCourse.Apply = request.Apply;
+            newCourse.CourseTags = new List<CourseTag>();
+            newCourse.CourseFeatures = new List<CourseFeature>();
+            newCourse.CategoryId = request.CategoryId;
+
+
+
+            newFeature.StartDate = DateTime.Now;
+            newFeature.Hours = request.Hours;
+            newFeature.Duration = request.Duration;
+            newFeature.Skill = request.Skill;
+            newFeature.StuNum = request.StuNum;
+            newFeature.Assesment = request.Assesment;
+            newFeature.Price = request.Price;
+            newFeature.Language = request.Language;
+
+
+
+            await _dbContext.SaveChangesAsync();
+
+            newCourse.CourseTags.AddRange(request.TagIds
+                .Select(tagIds => new CourseTag()
+                {
+                    CourseId = newCourse.Id,
+                    TagId = tagIds
+                }));
+
+            newCourse.CourseFeatures.Add(new CourseFeature() { CourseId = newCourse.Id, FeaturesId = newFeature.Id, CreatedDate = DateTime.Now });
+            ViewBag.Categories = await GetCategories();
+            ViewBag.Tags = await GetTags();
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
 
@@ -166,6 +225,14 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             return new SelectList(tags, "Id", "Name");
         }
 
+        public async Task<SelectList> GetTagsByCourseId(int? courseId)
+        {
+            IEnumerable<Tag> tags = await _dbContext.Tags
+                .Where(m => !m.CourseTag.Any(m => m.CourseId == courseId))
+                .ToListAsync();
+            return new SelectList(tags, "Id", "Name");
+        }
+
 
 
 
@@ -181,84 +248,33 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
         }
 
 
+        public async Task<IActionResult> Index(int page = 1)
+        {
+            var query = _dbContext.Courses
+                .Include(m => m.Category)
+                .AsNoTracking()
+                .Select(m => new CourseListVM()
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    ImgUrl = m.ImgUrl,
+                    CategoryName = m.Category.Name,
+                    Date = m.CreatedDate
+                });
+
+            return View(await PaginationVM<CourseListVM>.CreateVM(query, page, 2));
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null) return BadRequest();
+            var course = await _dbContext.Courses.AsNoTracking().FirstOrDefaultAsync(k => k.Id == id);
+            if (course is null) return NotFound();
+            _dbContext.Remove(course);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public async Task<IActionResult> Index(int page = 1)
-        //{
-        //    var query = _dbContext.Courses
-        //        .Include(m => m.Category)
-        //        .AsNoTracking()
-        //        .Select(m => new CourseListVM()
-        //        {
-        //            Id = m.Id,
-        //            Name = m.Name,
-        //            ImgUrl = m.ImgUrl,
-        //            CategoryName = m.Category.Name,
-        //            Date = m.Date
-        //        });
-
-        //    return View(await PaginationVM<CourseListVM>.CreateVM(query, page, 2));
-        //}
-        //public async Task<IActionResult> Detail(int? id)
-        //{
-        //    if (id is null) return BadRequest();
-        //    var query = await _dbContext.Courses
-        //        .Include(m => m.courseFeatures)
-        //        .Include(m => m.CourseTags)
-        //        .Include(m => m.Category)
-        //        .AsNoTracking()
-        //        .Select(m => new CourseDetailVM()
-        //        {
-        //            Id = m.Id,
-        //            ImgUrl = m.ImgUrl,
-        //            Name = m.Name,
-        //            Desc = m.Desc,
-        //            About = m.About,
-        //            Apply = m.Apply,
-        //            Certification = m.Certification,
-        //            Date = m.Date,
-        //            CourseFeatures = m.courseFeatures,
-        //            CategoryName = m.Category.Name,
-        //            CourseTags = m.CourseTags
-        //        }).FirstOrDefaultAsync(m => m.Id == id);
-        //    if (query is null) return NotFound();
-        //    return View(query);
-
-        //}
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id is null) return BadRequest();
-        //    var course = await _dbContext.Courses.AsNoTracking().FirstOrDefaultAsync(k => k.Id == id);
-        //    if (course is null) return NotFound();
-        //    _dbContext.Remove(course);
-        //    await _dbContext.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-
-
-        //}
+        }
     }
 }

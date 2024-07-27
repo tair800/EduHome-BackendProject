@@ -13,7 +13,7 @@ namespace BackEndProject_Edu.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var courses = _dbContext.Courses.ToList();
+            var courses = _dbContext.Courses.Take(3).ToList();
             return View(await Task.FromResult(courses));
         }
     }

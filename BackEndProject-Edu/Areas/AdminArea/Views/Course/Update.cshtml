@@ -4,8 +4,8 @@
     <div class="row">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Product Create form</h4>
-                <form enctype="multipart/form-data" asp-action="create" method="post" class="forms-sample">
+                <h4 class="card-title">Product Update form</h4>
+                <form enctype="multipart/form-data" asp-action="update" method="post" class="forms-sample">
                     <div class="form-group">
                         <label asp-for="ImgUrl"></label>
                         <input asp-for="ImgUrl" class="form-control" placeholder="Count">
@@ -79,7 +79,12 @@
                         <span class="text-danger" asp-validation-for="Price"></span> @* //errorlari gosderir *@
 
                     </div>
+                    <div class="form-group">
+                        <label asp-for="Photo"></label>
+                        <input asp-for="Photo" class="form-control" placeholder="Price">
+                        <span class="text-danger" asp-validation-for="Photo"></span> @* //errorlari gosderir *@
 
+                    </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Categories</label>
                         <select class="form-select form-select-lg" asp-for="CategoryId" asp-items="@ViewBag.Categories">
@@ -90,6 +95,7 @@
                         <select class="form-select form-select-lg" asp-for="TagIds" asp-items="@ViewBag.Tags">
                         </select>
                     </div>
+               
 
 
                     <button type="submit" class="btn btn-primary mr-2">Update</button>
