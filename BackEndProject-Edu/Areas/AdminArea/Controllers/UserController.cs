@@ -124,12 +124,14 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return BadRequest();
 
-            var changePassword = _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+            var changePassword = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
 
-            if (!changePassword.IsCompletedSuccessfully)
+            if (!changePassword.Succeeded)
             {
-                ModelState.AddModelError("", "Something went wrong");
-
+                foreach (var error in changePassword.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
                 return View(request);
             }
             await _signInManager.RefreshSignInAsync(user);

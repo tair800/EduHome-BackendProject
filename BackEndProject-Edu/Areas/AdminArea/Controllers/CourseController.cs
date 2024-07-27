@@ -86,6 +86,12 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 
             await _dbContext.SaveChangesAsync();
 
+
+            List<string> emails = new() { "tahir.aslanlee@gmail.com" };
+            string body = $"<a href='http://localhost:5225/course/detail/{newCourse.Id}'>Go to course post</a>";
+            _emailService.SendEmail(emails, body, "New COurse Post", "View course post");
+
+
             return RedirectToAction("Index");
         }
 
