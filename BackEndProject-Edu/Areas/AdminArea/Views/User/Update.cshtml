@@ -22,13 +22,12 @@
                         <span class="text-danger" asp-validation-for="FullName"></span>
 
                     </div>
-
                     <div class="form-group">
                         <label asp-for="Email"></label>
-                        <input asp-for="Email"  class="form-control" placeholder="Count">
-                        <span class="text-danger" asp-validation-for="Email"></span> @* //errorlari gosderir *@
-
+                        <input asp-for="Email" class="form-control" placeholder="Email" disabled="disabled">
+                        <span class="text-danger" asp-validation-for="Email"></span>
                     </div>
+
                     <button type="submit" class="btn btn-primary mr-2">Update</button>
                     <a asp-action="index" class="btn btn-light">Go Back</a>
                 </form>
