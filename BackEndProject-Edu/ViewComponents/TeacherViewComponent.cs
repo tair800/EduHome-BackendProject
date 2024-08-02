@@ -14,7 +14,7 @@ namespace BackEndProject_Edu.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var teachers = _dbContext.Teachers.AsNoTracking().ToList();
+            var teachers = await _dbContext.Teachers.AsNoTracking().ToListAsync();
             return View(await Task.FromResult(teachers));
         }
     }

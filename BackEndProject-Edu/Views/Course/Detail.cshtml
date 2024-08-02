@@ -60,25 +60,34 @@
                     </div>
                     <div class="reply-area">
                         <h3>LEAVE A REPLY</h3>
-                        <p>I must explain to you how all this a mistaken idea of ncing great explorer of the rut<br> the is lder of human happinescias unde omnis iste natus error sit volptatem </p>
-                        <form id="contact-form" action="http://demo.devitems.com/eduhome/mail.php" method="post">
+
+                        <input type="hidden" name="courseId" value="@Model.Id" />
+                        @foreach (var item in Model?.Comments)
+                        {
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Name</p>
-                                    <input type="text" name="name" id="name">
                                 </div>
                                 <div class="col-md-12">
-                                    <p>Email</p>
-                                    <input type="text" name="email" id="email">
+
+                                    <h4 class="text-success ">
+                                        @item.AppUser?.Email@if (item.AppUser.UserName == User.Identity.Name)
+                                        {
+                                            <a class="text-danger" asp-action="DeleteComment" asp-route-id="@item.Id">Delete</a>
+                                        }
+                                    </h4>
+                                    <p>@item.Message</p><span>@item.CreatedDate</span>
                                 </div>
-                                <div class="col-md-12">
-                                    <p>Subject</p>
-                                    <input type="text" name="subject" id="subject">
-                                    <p>Massage</p>
-                                    <textarea class="message" ></textarea>
-                                </div>
+
                             </div>
-                            <button class="reply-btn" course-id="@Model.Id" data-text="send"><span>send message</span></button>
+
+                        }
+                        <form action="AddComment" method="post">
+                            <div class="col-md-12">
+
+                                <textarea name="message"></textarea>
+
+                            </div>
+                            <button class="reply-btn" course-id="@Model.Id?" data-text="send"><span>send message</span></button>
                             <p class="form-messege"></p>
                         </form>
                     </div>

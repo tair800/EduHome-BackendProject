@@ -1,6 +1,7 @@
 ﻿using BackEndProject_Edu.Data;
 using BackEndProject_Edu.Models;
 using BackEndProject_Edu.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,13 @@ namespace BackEndProject_Edu.Controllers
         {
             if (id is null) return BadRequest();
 
-            var course = _context.Courses.Include(c => c.Category).Include(m => m.CourseTags).ThenInclude(m => m.Tag).Include(m => m.CourseFeatures).ThenInclude(m => m.Features).AsNoTracking().FirstOrDefault(b => b.Id == id);
+            var course = _context.Courses
+                .Include(c => c.Category)
+                .Include(m => m.CourseTags).ThenInclude(m => m.Tag)
+                .Include(m => m.CourseFeatures).ThenInclude(m => m.Features)
+                .Include(m => m.Comments).ThenInclude(m => m.AppUser)
+                .AsNoTracking()
+                .FirstOrDefault(b => b.Id == id);
             var blogs = _context.Blogs.AsNoTracking().ToList();
             var categories = _context.Categories.Include(m => m.Course).AsNoTracking().ToList();
 
@@ -45,7 +52,7 @@ namespace BackEndProject_Edu.Controllers
                 Blogs = blogs,
                 CourseTags = course.CourseTags,
                 CourseFeatures = course.CourseFeatures,
-
+                Comments = course.Comments,
 
             };
             return View(courseVM);
@@ -85,6 +92,39 @@ namespace BackEndProject_Edu.Controllers
             var datas = _context.Courses.Skip(offset).Take(3).ToList();
             return PartialView("_CoursePartialView", datas);
 
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        [Authorize]
+        public async Task<IActionResult> AddComment(string message, int courseId)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (string.IsNullOrEmpty(message)) return NotFound();
+
+            Comment newMessage = new()
+            {
+                Message = message,
+                CourseId = courseId,
+                AppUserId = user.Id,
+                CreatedDate = DateTime.UtcNow
+            };
+            _context.Comments.Add(newMessage);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Detail", new { Id = courseId });
+        }
+        public async Task<IActionResult> DeleteComment(int? id)
+        {
+            if (id is null) return BadRequest();
+
+            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (comment == null) return NotFound();
+
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("detail", new { id = comment.CourseId });
         }
     }
 }

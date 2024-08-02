@@ -18,5 +18,7 @@ namespace BackEndProject_Edu.ViewModels
         public IEnumerable<Blog> Blogs { get; set; }
         public IEnumerable<CourseTag> CourseTags { get; set; }
         public IEnumerable<CourseFeature> CourseFeatures { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
+
     }
 }
