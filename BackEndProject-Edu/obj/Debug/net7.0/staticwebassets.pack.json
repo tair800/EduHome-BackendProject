@@ -745,6 +745,14 @@
       "PackagePath": "staticwebassets\\img\\course\\slider2.jpg"
     },
     {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\course\\teacher12.jpg",
+      "PackagePath": "staticwebassets\\img\\course\\teacher12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\course\\teacher7.jpg",
+      "PackagePath": "staticwebassets\\img\\course\\teacher7.jpg"
+    },
+    {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\event-details.jpg",
       "PackagePath": "staticwebassets\\img\\event\\event-details.jpg"
     },
