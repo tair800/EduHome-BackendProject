@@ -20,5 +20,6 @@ namespace BackEndProject_Edu.ViewModels
         public IEnumerable<CourseFeature> CourseFeatures { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
 
+        public bool IsAcquired { get; set; }
     }
 }

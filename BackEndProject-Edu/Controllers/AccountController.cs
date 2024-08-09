@@ -48,18 +48,18 @@ namespace BackEndProject_Edu.Controllers
                 return View(request);
             }
 
-            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            string link = Url.Action(nameof(VerifyEmail), "Account", new { email = user.Email, token },
-                Request.Scheme, Request.Host.ToString());
+            //string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            //string link = Url.Action(nameof(VerifyEmail), "Account", new { email = user.Email, token },
+            //    Request.Scheme, Request.Host.ToString());
 
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader("wwwroot/templates/emailTemplate/emailConfirm.html"))
-            {
-                body = reader.ReadToEnd();
-            };
-            body = body.Replace("{{link}}", link);
-            body = body.Replace("{{username}}", user.FullName);
-            _emailService.SendEmail(new() { user.Email }, body, "Email verification", "Verify email");
+            //string body = string.Empty;
+            //using (StreamReader reader = new StreamReader("wwwroot/templates/emailTemplate/emailConfirm.html"))
+            //{
+            //    body = reader.ReadToEnd();
+            //};
+            //body = body.Replace("{{link}}", link);
+            //body = body.Replace("{{username}}", user.FullName);
+            //_emailService.SendEmail(new() { user.Email }, body, "Email verification", "Verify email");
 
             await _userManager.AddToRoleAsync(user, RolesEnum.Member.ToString());
             return RedirectToAction("index", "home");

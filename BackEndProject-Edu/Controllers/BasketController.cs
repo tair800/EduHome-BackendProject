@@ -61,14 +61,11 @@ namespace BackEndProject_Edu.Controllers
             }
 
             AppUser existUser = await _userManager.GetUserAsync(User);
-
-            Course existCourse = await _dbContext.Courses
-                .FirstOrDefaultAsync(c => c.Id == courseId);
+            Course existCourse = await _dbContext.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
+            if (existCourse is null) return NotFound();
 
             BasketCourse basketProduct = await _dbContext.BasketCOurses
                 .FirstOrDefaultAsync(c => c.CourseId == courseId && c.Basket.AppUserId == existUser.Id);
-
-            if (existCourse is null) return NotFound();
 
             Basket existBasket = await _dbContext.Baskets
                 .Include(c => c.BasketCourses)
@@ -78,8 +75,7 @@ namespace BackEndProject_Edu.Controllers
             {
                 basketProduct.Quantity++;
                 await _dbContext.SaveChangesAsync();
-
-                return Json(new { success = true, message = "Course added to basket" });
+                return Json(new { success = true, message = "Course added to basket" });
             }
 
             if (existBasket is not null)
@@ -92,11 +88,8 @@ namespace BackEndProject_Edu.Controllers
                 });
 
                 await _dbContext.SaveChangesAsync();
-
-                return Json(new { success = true, message = "Course added to basket" });
+                return Json(new { success = true, message = "Course added to basket" });
             }
-
-
 
             Basket newBasket = new()
             {
@@ -116,7 +109,7 @@ namespace BackEndProject_Edu.Controllers
             await _dbContext.BasketCOurses.AddAsync(newBasketCourse);
             await _dbContext.SaveChangesAsync();
 
-            return Ok(new { Response = "Added" });
+            return Json(new { success = true, message = "Course added to basket" });
         }
 
         [HttpPost]

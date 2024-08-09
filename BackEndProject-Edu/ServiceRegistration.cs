@@ -54,7 +54,7 @@ namespace BackEndProject_Edu
                     //todo:email confirm sondurmusen
                     RequireUniqueEmail = true,
                 };
-                options.SignIn.RequireConfirmedEmail = true;
+                //options.SignIn.RequireConfirmedEmail = true;
 
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<EduDbContext>();
             //services.AddSignalR();

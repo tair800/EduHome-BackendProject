@@ -55,9 +55,10 @@
                                     </li>
                                     <li><a href="/contact">Contact</a></li>
                                     <li><a href="/basket/index">Buy Now</a></li>
-                                    <a class="count">@Model.BasketCount </a>
+                                  
                                     @if (User.Identity.IsAuthenticated)
                                     {
+                                        <a class="count">@Model.BasketCount </a>
                                         <li>@ViewBag.FullName</li>
                                         <a href="/account/logout">Log out</a>
                                     }

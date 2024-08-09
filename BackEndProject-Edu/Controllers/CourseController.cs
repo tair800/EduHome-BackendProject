@@ -30,14 +30,20 @@ namespace BackEndProject_Edu.Controllers
             if (id is null) return BadRequest();
 
             var course = _context.Courses
-                .Include(c => c.Category)
-                .Include(m => m.CourseTags).ThenInclude(m => m.Tag)
-                .Include(m => m.CourseFeatures).ThenInclude(m => m.Features)
-                .Include(m => m.Comments).ThenInclude(m => m.AppUser)
-                .AsNoTracking()
-                .FirstOrDefault(b => b.Id == id);
+              .Include(c => c.Category)
+              .Include(m => m.CourseTags).ThenInclude(m => m.Tag)
+              .Include(m => m.CourseFeatures).ThenInclude(m => m.Features)
+              .Include(m => m.Comments).ThenInclude(m => m.AppUser)
+              .Include(m => m.BasketCourses)
+              .AsNoTracking()
+              .FirstOrDefault(b => b.Id == id);
+
             var blogs = _context.Blogs.AsNoTracking().ToList();
             var categories = _context.Categories.Include(m => m.Course).AsNoTracking().ToList();
+
+            var userId = User.Identity?.Name;
+            var basketCourse = _context.BasketCOurses
+                .FirstOrDefault(bc => bc.CourseId == id && bc.Basket.AppUserId == userId);
 
             CourseVM courseVM = new()
             {
@@ -53,7 +59,8 @@ namespace BackEndProject_Edu.Controllers
                 CourseTags = course.CourseTags,
                 CourseFeatures = course.CourseFeatures,
                 Comments = course.Comments,
-
+                IsAcquired = basketCourse != null && basketCourse.Quantity == 1,
+                // CourseCount = basketCourse?.Quantity
             };
             return View(courseVM);
         }

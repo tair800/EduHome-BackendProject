@@ -15,8 +15,12 @@
                 <h3><a href="course-details.html">@course.Name</a></h3>
                 <p>@course.Desc</p>
                 <a class="default-btn" asp-controller="course" asp-action="detail" asp-route-id="@course.Id">read more</a>
-                <a class="default-btn" asp-controller="basket" asp-action="addbasket" asp-route-id="@course.Id">Buy Now</a>
+
+           @*      <form asp-controller="Basket" asp-action="Add" asp-route-courseId="@course.Id" course-id="courseId" method="post">
+                    <button type="submit" class="default-btn buy">Buy</button>
+                </form> *@
             </div>
         </div>
     </div>
 }
+

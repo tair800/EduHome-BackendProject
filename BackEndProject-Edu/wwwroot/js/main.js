@@ -1,26 +1,30 @@
 (function ($) {
 "use strict";  
-
-    //basket
-    const basketBtn = document.querySelectorAll(".buy");
-    basketBtn.forEach(btn => {
+    document.querySelectorAll(".buy").forEach(btn => {
         btn.addEventListener("click", function () {
-            const courseId = $(this).attr("course-id");
+            const courseId = this.getAttribute("course-id");
 
             $.ajax({
                 url: `/Basket/Add?courseId=${courseId}`,
-                method: "Post",
-                success: function () {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Added",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                method: "POST",
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        btn.textContent = "Acquired";
+                        btn.disabled = true;
+                    } else if (response.redirectUrl) {
+                        window.location.href = response.redirectUrl;
+                    }
                 }
-            })
-        })
-    })
+            });
+        });
+    });
+
 
     const deleteBtn = document.querySelectorAll(".course-delete");
     deleteBtn.forEach(btn => {

@@ -56,10 +56,18 @@
                                 }
                             </ul>
                             <br />
-@*                             <form asp-controller="Basket" asp-action="Add" asp-route-courseId="@Model.Id" method="post">
- *@                                <button course-id="@Model.Id" class="buy">Buy</button>
-@*                             </form>
- *@                        </div>
+                            <button course-id="@Model.Id" class="buy btn btn-danger"
+                                    style="width: 150px; height: 50px;">
+                                @if (Model.IsAcquired)
+                                {
+                                    <span class="btn btn-success">Acquired</span>
+                                }
+                                else
+                                {
+                                    <span>Buy</span>
+                                }
+                            </button>
+                        </div>
                     </div>
                     <div class="reply-area">
                         <h3>LEAVE A REPLY</h3>
