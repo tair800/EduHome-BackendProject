@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string ImgUrl { get; set; }
         public string CategoryName { get; set; }
+        public decimal Price { get; set; }
         public DateTime? Date { get; set; }
     }
 }

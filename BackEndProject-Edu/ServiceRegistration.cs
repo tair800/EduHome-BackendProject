@@ -57,7 +57,7 @@ namespace BackEndProject_Edu
                 options.SignIn.RequireConfirmedEmail = true;
 
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<EduDbContext>();
-            services.AddSignalR();
+            //services.AddSignalR();
         }
     }
 }

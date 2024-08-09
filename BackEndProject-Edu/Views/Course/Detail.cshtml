@@ -53,10 +53,13 @@
                                     <li>language <span>@features.Features.Language</span></li>
                                     <li>students <span>@features.Features.StuNum</span></li>
                                     <li>assesments <span>@features.Features.Assesment</span></li>
-                                    <h3 class="red">course fee $@features.Features.Price</h3>
                                 }
                             </ul>
-                        </div>
+                            <br />
+@*                             <form asp-controller="Basket" asp-action="Add" asp-route-courseId="@Model.Id" method="post">
+ *@                                <button course-id="@Model.Id" class="buy">Buy</button>
+@*                             </form>
+ *@                        </div>
                     </div>
                     <div class="reply-area">
                         <h3>LEAVE A REPLY</h3>
@@ -121,7 +124,7 @@
                     </div>
                     <div class="single-blog-widget mb-50">
                         <div class="single-blog-banner">
-                            <a href="blog-details.html" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
+                            <a href="blog/detail" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
                             <h2>best<br> eductaion<br> theme</h2>
                         </div>
                     </div>
@@ -131,7 +134,7 @@
                         {
                             <div class="single-post mb-30">
                                 <div class="single-post-img">
-                                    <a href="blog-details.html">
+                                    <a href="/blog/detail/@blog.Id">
                                         <img src="~/img/blog/@blog.ImgUrl" width="80" height="80" alt="post">
                                         <div class="blog-hover">
                                             <i class="fa fa-link"></i>
@@ -139,7 +142,7 @@
                                     </a>
                                 </div>
                                 <div class="single-post-content">
-                                    <h4><a href="blog-details.html">@blog.Name</a></h4>
+                                    <h4><a href="/blog/detail/@blog.Id">@blog.Name</a></h4>
                                     <p>By Alex  /  June 20, 2017</p>
                                 </div>
                             </div>

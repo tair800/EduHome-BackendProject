@@ -96,6 +96,58 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("BackEndProject_Edu.Models.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique()
+                        .HasFilter("[AppUserId] IS NOT NULL");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("BackEndProject_Edu.Models.BasketCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("BasketCOurses");
+                });
+
             modelBuilder.Entity("BackEndProject_Edu.Models.Blog", b =>
                 {
                     b.Property<int>("Id")
@@ -206,6 +258,9 @@ namespace BackEndProjectEdu.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -319,9 +374,6 @@ namespace BackEndProjectEdu.Data.Migrations
 
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Price")
-                        .HasColumnType("int");
 
                     b.Property<string>("Skill")
                         .HasColumnType("nvarchar(max)");
@@ -637,6 +689,34 @@ namespace BackEndProjectEdu.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BackEndProject_Edu.Models.Basket", b =>
+                {
+                    b.HasOne("BackEndProject_Edu.Models.AppUser", "AppUser")
+                        .WithOne("Basket")
+                        .HasForeignKey("BackEndProject_Edu.Models.Basket", "AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("BackEndProject_Edu.Models.BasketCourse", b =>
+                {
+                    b.HasOne("BackEndProject_Edu.Models.Basket", "Basket")
+                        .WithMany("BasketCourses")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BackEndProject_Edu.Models.Course", "Course")
+                        .WithMany("BasketCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("BackEndProject_Edu.Models.Comment", b =>
                 {
                     b.HasOne("BackEndProject_Edu.Models.AppUser", "AppUser")
@@ -765,7 +845,14 @@ namespace BackEndProjectEdu.Data.Migrations
 
             modelBuilder.Entity("BackEndProject_Edu.Models.AppUser", b =>
                 {
+                    b.Navigation("Basket");
+
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("BackEndProject_Edu.Models.Basket", b =>
+                {
+                    b.Navigation("BasketCourses");
                 });
 
             modelBuilder.Entity("BackEndProject_Edu.Models.Category", b =>
@@ -775,6 +862,8 @@ namespace BackEndProjectEdu.Data.Migrations
 
             modelBuilder.Entity("BackEndProject_Edu.Models.Course", b =>
                 {
+                    b.Navigation("BasketCourses");
+
                     b.Navigation("Comments");
 
                     b.Navigation("CourseFeatures");

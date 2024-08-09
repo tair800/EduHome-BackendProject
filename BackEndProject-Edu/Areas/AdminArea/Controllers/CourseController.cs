@@ -57,6 +57,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 CourseTags = new List<CourseTag>(),
                 CourseFeatures = new List<CourseFeature>(),
                 CategoryId = request.CategoryId,
+                Price = request.Price
             };
 
             Features newFeature = new()
@@ -67,7 +68,6 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 Skill = request.Skill,
                 StuNum = request.StuNum,
                 Assesment = request.Assesment,
-                Price = request.Price,
                 Language = request.Language,
             };
 
@@ -116,7 +116,8 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 Date = course.Date,
                 CourseFeatures = course.CourseFeatures.Select(cf => cf.Features).ToList(),
                 CategoryName = course.Category?.Name,
-                CourseTags = course.CourseTags.Select(ct => ct.Tag).ToList()
+                CourseTags = course.CourseTags.Select(ct => ct.Tag).ToList(),
+                Price = (int)course.Price
             };
             return View(vm);
         }
@@ -146,8 +147,8 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 Language = dbCourse.CourseFeatures.FirstOrDefault().Features.Language,
                 StuNum = dbCourse.CourseFeatures.FirstOrDefault().Features.StuNum,
                 Assesment = dbCourse.CourseFeatures.FirstOrDefault().Features.Assesment,
-                Price = dbCourse.CourseFeatures.FirstOrDefault().Features.Price,
                 Hours = dbCourse.CourseFeatures.FirstOrDefault().Features.Hours,
+                Price = (int)dbCourse.Price
 
             };
 
@@ -180,6 +181,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             newCourse.CourseTags = new List<CourseTag>();
             newCourse.CourseFeatures = new List<CourseFeature>();
             newCourse.CategoryId = request.CategoryId;
+            newCourse.Price = request.Price;
 
 
 
@@ -189,7 +191,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             newFeature.Skill = request.Skill;
             newFeature.StuNum = request.StuNum;
             newFeature.Assesment = request.Assesment;
-            newFeature.Price = request.Price;
+            //newFeature.Price = request.Price;
             newFeature.Language = request.Language;
 
 
@@ -261,6 +263,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 .AsNoTracking()
                 .Select(m => new CourseListVM()
                 {
+                    Price = (int)m.Price,
                     Id = m.Id,
                     Name = m.Name,
                     ImgUrl = m.ImgUrl,

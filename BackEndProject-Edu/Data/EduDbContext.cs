@@ -20,6 +20,9 @@ namespace BackEndProject_Edu.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<CourseTag> CourseTags { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketCourse> BasketCOurses { get; set; }
+
 
         public DbSet<Comment> Comments { get; set; }
 

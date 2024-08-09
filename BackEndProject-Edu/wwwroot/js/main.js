@@ -1,6 +1,61 @@
 (function ($) {
 "use strict";  
 
+    //basket
+    const basketBtn = document.querySelectorAll(".buy");
+    basketBtn.forEach(btn => {
+        btn.addEventListener("click", function () {
+            const courseId = $(this).attr("course-id");
+
+            $.ajax({
+                url: `/Basket/Add?courseId=${courseId}`,
+                method: "Post",
+                success: function () {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Added",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+        })
+    })
+
+    const deleteBtn = document.querySelectorAll(".course-delete");
+    deleteBtn.forEach(btn => {
+        btn.addEventListener("click", function () {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                    const courseId = $(this).attr("course-id");
+                    const deleteBtn=$(this)
+                    $.ajax({
+                        url: `/Basket/Remove?courseId=${courseId}`,
+                        method: "Post",
+                        success: function () {
+                            deleteBtn.closest("tr").remove();
+                        }
+                    })
+                }
+            });
+        })
+    })
+
+
+
     //comment
     $(".reply-btn").on("click", function () {
         const courseId = $(this).attr("course-id");
