@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    //[Authorize(Roles = "admin,superadmin")]
+
     public class SpeakerController : Controller
     {
         private readonly EduDbContext _dbContext;
@@ -113,7 +115,35 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 
 
 
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Events = await GetEvents();
+            return View();
+        }
 
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Create(SpeakerCreateVM request)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Events = await GetEvents();
+                return View(request);
+            }
+
+            Speaker speaker = new()
+            {
+                Name = request.Name,
+                Position = request.Position,
+                ImgUrl = await SaveFilesAsync(request.Photo),
+                EventId = request.EventId
+            };
+
+            await _dbContext.Speakers.AddAsync(speaker);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
 
 
 

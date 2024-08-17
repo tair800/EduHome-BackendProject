@@ -1,26 +1,24 @@
 ﻿using BackEndProject_Edu.Areas.AdminArea.ViewModels.UserVMs;
-using BackEndProject_Edu.Hubs;
 using BackEndProject_Edu.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
-    //[Authorize(Roles = "SuperAdmin,User")]
+    //[Authorize(Roles = "admin,superadmin")]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IHubContext<ChatHub> _hubContext;
+        //private readonly IHubContext<ChatHub> _hubContext;
 
 
-        public UserController(UserManager<AppUser> userManager, IHubContext<ChatHub> hubContext, SignInManager<AppUser> signInManager)
+        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
-            _hubContext = hubContext;
+            // _hubContext = hubContext;
             _signInManager = signInManager;
         }
 
@@ -57,7 +55,7 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return NotFound();
 
-            await _hubContext.Clients.Client(user.ConnectionId).SendAsync("OrderAccepted", user.Id);
+            //await _hubContext.Clients.Client(user.ConnectionId).SendAsync("OrderAccepted", user.Id);
             return RedirectToAction("index");
         }
 

@@ -8,5 +8,6 @@
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
+        public bool IsAcquired { get; set; }
     }
 }

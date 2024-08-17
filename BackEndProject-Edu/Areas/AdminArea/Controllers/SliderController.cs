@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    //[Authorize(Roles = "admin,superadmin")]
+
 
     public class SliderController : Controller
     {
@@ -55,14 +57,18 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
         {
             if (id == null) return BadRequest();
             var slider = await _dbContext.Sliders.FirstOrDefaultAsync(p => p.Id == id);
-            var file = request.Photo;
+            var file = request?.Photo;
 
             if (slider is null) return NotFound();
             if (!ModelState.IsValid) return View(request);
 
             slider.Title = request.Title;
             slider.Desc = request.Description;
-            slider.ImgUrl = await SaveFilesAsync(file);
+
+            if (request.Photo != null)
+            {
+                slider.ImgUrl = await SaveFilesAsync(request.Photo);
+            }
 
 
             await _dbContext.SaveChangesAsync();
@@ -101,6 +107,20 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
         }
 
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            var slider = await _dbContext.Sliders.FirstOrDefaultAsync(s => s.Id == id);
+            if (slider == null) return NotFound();
+
+
+
+            _dbContext.Sliders.Remove(slider);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
 
 
 

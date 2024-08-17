@@ -60,7 +60,7 @@ namespace BackEndProject_Edu.Controllers
                 CourseFeatures = course.CourseFeatures,
                 Comments = course.Comments,
                 IsAcquired = basketCourse != null && basketCourse.Quantity == 1,
-                // CourseCount = basketCourse?.Quantity
+                //CourseCount = basketCourse?.Quantity
             };
             return View(courseVM);
         }

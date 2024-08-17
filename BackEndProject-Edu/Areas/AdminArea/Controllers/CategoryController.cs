@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    //[Authorize(Roles = "admin,superadmin")]
+
     public class CategoryController : Controller
     {
         private readonly EduDbContext _dbContext;

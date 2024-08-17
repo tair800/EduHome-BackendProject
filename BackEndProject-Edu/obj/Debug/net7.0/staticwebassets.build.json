@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w0eBUEuLvkVkar6pRBe7NvW70opXj9baJqY/Oq91Oo8=",
+  "Hash": "iPvqsk2/jRQy4VPKVJgSrzBflHM5c1IAgOmLbDcL1R4=",
   "Source": "BackEndProject-Edu",
   "BasePath": "_content/BackEndProject-Edu",
   "Mode": "Default",
@@ -3171,6 +3171,25 @@
       "OriginalItemSpec": "wwwroot\\img\\blog\\blog-img.jpg"
     },
     {
+      "Identity": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\blog\\event3.jpg",
+      "SourceId": "BackEndProject-Edu",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\",
+      "BasePath": "_content/BackEndProject-Edu",
+      "RelativePath": "img/blog/event3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\blog\\event3.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\choose\\choose.png",
       "SourceId": "BackEndProject-Edu",
       "SourceType": "Discovered",
@@ -3872,6 +3891,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\event\\home.png"
+    },
+    {
+      "Identity": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\slider1.jpg",
+      "SourceId": "BackEndProject-Edu",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\",
+      "BasePath": "_content/BackEndProject-Edu",
+      "RelativePath": "img/event/slider1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\event\\slider1.jpg"
     },
     {
       "Identity": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\slider3.jpg",

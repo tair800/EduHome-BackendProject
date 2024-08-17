@@ -15,6 +15,8 @@ namespace BackEndProject_Edu.Areas.AdminArea.ViewModels.CourseVMs
         public string CategoryName { get; set; }
         public decimal Price { get; set; }
 
+        public bool IsAcquired { get; set; }
+
         public List<Tag> CourseTags { get; set; } = new List<Tag>();
         public List<Features> CourseFeatures { get; set; } = new List<Features>();
     }

@@ -661,6 +661,10 @@
       "PackagePath": "staticwebassets\\img\\blog\\blog9.jpg"
     },
     {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\blog\\event3.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\event3.jpg"
+    },
+    {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\choose\\choose-bd.jpg",
       "PackagePath": "staticwebassets\\img\\choose\\choose-bd.jpg"
     },
@@ -807,6 +811,10 @@
     {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\home.png",
       "PackagePath": "staticwebassets\\img\\event\\home.png"
+    },
+    {
+      "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\slider1.jpg",
+      "PackagePath": "staticwebassets\\img\\event\\slider1.jpg"
     },
     {
       "Id": "C:\\Users\\Owner\\Desktop\\BackEndProject-Edu\\BackEndProject-Edu\\wwwroot\\img\\event\\slider3.jpg",

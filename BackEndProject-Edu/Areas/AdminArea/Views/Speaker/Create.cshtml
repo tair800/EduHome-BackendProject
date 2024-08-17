@@ -1,0 +1,35 @@
+﻿@model BackEndProject_Edu.Areas.AdminArea.ViewModels.SpeakerVMs.SpeakerCreateVM
+
+@{
+    ViewBag.Title = "Create Speaker";
+}
+
+<h2>Create Speaker</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Position"></label>
+        <input asp-for="Position" class="form-control" />
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Photo"></label>
+        <input asp-for="Photo" type="file" class="form-control-file" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EventId"></label>
+        <select asp-for="EventId" asp-items="ViewBag.Events" class="form-control"></select>
+        <span asp-validation-for="EventId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section script {
+    <partial name="_ValidationScriptsPartial" />
+}

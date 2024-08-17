@@ -77,18 +77,22 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
             return RedirectToAction("index");
         }
 
-        public async Task<IActionResult> UpdateUserRole(string id)
+        public async Task<IActionResult> Update(string id)
         {
             if (id is null) return BadRequest();
             var user = await _userManager.FindByIdAsync(id);
-            if (user is null) return NotFound();
+            if (user == null)
+            {
+                return NotFound($"User with ID {id} not found.");
+            }
             var roles = await _roleManager.Roles.ToListAsync();
             var userRoles = await _userManager.GetRolesAsync(user);
             var roleUpdateVm = new RoleUpdateVM(user.UserName, roles, userRoles);
             return View(roleUpdateVm);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateUserRole(string id, List<string> newUserRoles)
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Update(string id, List<string> newUserRoles)
         {
             if (id is null) return BadRequest();
             var user = await _userManager.FindByIdAsync(id);

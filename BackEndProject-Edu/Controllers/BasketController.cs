@@ -42,7 +42,8 @@ namespace BackEndProject_Edu.Controllers
                         Name = item.Course.Name,
                         Price = (int)item.Course.Price,
                         TotalPrice = (int)item.Course.Price * item.Quantity,
-                        BasketCount = item.Quantity
+                        BasketCount = item.Quantity,
+                        IsAcquired = true
                     });
                 }
             }

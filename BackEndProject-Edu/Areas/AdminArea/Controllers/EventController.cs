@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    //[Authorize(Roles = "admin,superadmin")]
+
     public class EventController : Controller
     {
         private readonly EduDbContext _dbContext;

@@ -11,6 +11,8 @@ using NuGet.Packaging;
 namespace BackEndProject_Edu.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    //[Authorize(Roles = "admin,superadmin")]
+
     public class CourseController : Controller
     {
         private readonly EduDbContext _dbContext;
@@ -117,7 +119,8 @@ namespace BackEndProject_Edu.Areas.AdminArea.Controllers
                 CourseFeatures = course.CourseFeatures.Select(cf => cf.Features).ToList(),
                 CategoryName = course.Category?.Name,
                 CourseTags = course.CourseTags.Select(ct => ct.Tag).ToList(),
-                Price = (int)course.Price
+                Price = (int)course.Price,
+
             };
             return View(vm);
         }
